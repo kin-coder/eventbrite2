@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+
+
+
+
+
+  <body>
+    <h1><center>SHOW EVENT...</center></h1>
+
+
+
+    <p>Start_date :
+    <%=@event.start_date%></p>
+
+    <p>Duration :
+    <%=@event.duration%> JOURS</p>
+
+    <p>Titre :
+    <%=@event.title%></br></p>
+
+    <p>Description:</p>
+    <%=@event.description%> </br></br>
+
+    <p>Price :
+    <%=@event.price%> €</p>
+
+    <p>Location :
+    <%=@event.location%></p></br>
+
+    <p>Admin :
+    <%=@event.admin.first_name%></p>
+
+
+
+
+
+    <h1><center>PHOTO</center></h1>
+
+<!--<p>Bienvenue sur la page d'ajout d'un avatar pour le User portant l'id : <%=@event.id%></p>
+<h3>Avatar actuel</h3>-->
+
+<center>
+<%if @event.avatar.attached?%>
+  <%= image_tag @event.avatar, alt: 'avatar'%>
+<%else%>
+  <!--<p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>-->
+<%end%>
+
+</br></br></br>
+
+    <h3>Mettre à jour ?</h3>
+<%= form_tag event_avatars_path(@event), multipart: true do %>
+  <%= file_field_tag :avatar %>
+  <%= submit_tag "mettre à jour" %>
+<% end %>
+</center>
+
+
+  </body>
+</html>

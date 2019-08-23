@@ -1,0 +1,51 @@
+<html>
+</br>
+<h1 class="text-success"><center>Les EVENEMENTS</center></h1>
+<% @event.each do |event| %>
+  <p class="text-primary"> <b>Titre:</b>
+    <%= event.title %></p>
+
+  <p>Description:</p>
+  <%= event.description %> </br></br>
+
+  <p>Location:
+    <%= event.location %> </p>
+
+  <p>Prix:
+    <%= event.price %> €</p>
+
+
+
+
+
+    <input  class = "btn btn-primary btn-lg" type ="button" value="Show" onclick="document.location.href='<%= event_path(event.id)%>';" style="background-color: lime">
+
+
+
+
+    <%= form_tag charges_path do %>
+    <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+
+    <label class="amount">
+      <span>Amount:<%=event.price %>€</span>
+    </label>
+    </article>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="PAIEMENT ONLINE!"
+          data-amount= "<%=event.price.to_i*100%>"
+          data-currency= "eur"
+          data-locale="auto"></script></br>
+
+          <% end %>
+<% end %>
+
+</html>
+
+<p>Find me in app/views/events/index.html.erb</p>
